@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HerEra | Modern Fashion for the Moroccan Woman</title>
+    <title>HerEra | Modern Fashion Morocco</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --burgundy: #800020;
             --beige: #F5F5DC;
-            --off-white: #FAF9F6;
             --black: #1a1a1a;
+            --off-white: #FAF9F6;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -26,7 +22,7 @@
             line-height: 1.6;
         }
 
-        /* NAVIGATION */
+        /* NAVIGATION & HEADER */
         header {
             background-color: var(--beige);
             padding: 1rem 5%;
@@ -36,40 +32,57 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .logo-container {
+        .logo-img {
+            height: 80px;
+            width: auto;
+        }
+
+        nav {
             display: flex;
             align-items: center;
-        }
-
-        .logo-text {
-            font-family: 'Playfair Display', serif;
-            color: var(--beige);
-            font-size: 2rem;
-            text-decoration: none;
-            letter-spacing: 3px;
         }
 
         nav a {
             color: var(--black);
             text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.85rem;
+            margin-left: 1.5rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
+            font-weight: 600;
             transition: 0.3s;
         }
 
-        nav a:hover {
-            color: var(--burgundy);
+        nav a:hover { color: var(--burgundy); }
+
+        /* PANIER (CART) STYLE */
+        .panier-status {
+            display: flex;
+            align-items: center;
+            margin-left: 1.5rem;
+            background: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+        }
+
+        #cart-count {
+            background: var(--burgundy);
+            color: white;
+            padding: 1px 7px;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 6px;
         }
 
         /* HERO SECTION */
         .hero {
-            height: 90vh;
-            /* Update the URL below with your actual hero image link */
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
                         url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070') center/cover no-repeat;
             display: flex;
             flex-direction: column;
@@ -80,110 +93,100 @@
             padding: 0 20px;
         }
 
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 5rem);
-            margin-bottom: 1rem;
-        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 0.5rem; }
+        .hero p { font-size: 1.2rem; max-width: 600px; font-style: italic; margin-bottom: 2rem; }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
-
-        /* ABOUT / MISSION */
+        /* MISSION SECTION */
         .mission {
             padding: 5rem 10%;
             background-color: var(--beige);
             text-align: center;
-            color: var(--black);
         }
 
-        .mission h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--burgundy);
-            margin-bottom: 1.5rem;
-            font-size: 2.5rem;
-        }
+        .mission h2 { font-family: 'Playfair Display', serif; color: var(--burgundy); margin-bottom: 1.5rem; font-size: 2.5rem; }
 
-        .mission p {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-
-        /* SHOP SECTION */
-        .shop {
-            padding: 5rem 5%;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--black);
-        }
-
+        /* SHOP GRID */
+        .shop { padding: 5rem 5%; }
+        .section-title { font-family: 'Playfair Display', serif; text-align: center; font-size: 2.5rem; margin-bottom: 3rem; }
+        
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
         .product-card {
             background: white;
+            display: flex;
+            flex-direction: column;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            height: 100%;
             transition: transform 0.4s ease;
-            cursor: pointer;
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
+        .product-card:hover { transform: translateY(-10px); }
 
+        /* THE IMAGE FIX */
         .product-img {
             width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-bottom: 5px solid var(--burgundy);
+            height: 480px; 
+            object-fit: cover; 
+            display: block;
+            border-bottom: 4px solid var(--burgundy);
         }
 
         .product-info {
-            padding: 1.5rem;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             text-align: center;
         }
 
-        .product-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
+        .product-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 5px; text-transform: capitalize; }
+        .price { color: var(--burgundy); font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; }
 
-        .price {
-            color: var(--burgundy);
+        /* BUTTONS */
+        .btn-stack { display: flex; flex-direction: column; gap: 8px; }
+
+        .add-to-panier {
+            background-color: var(--black);
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* BUTTON */
-        .btn {
+        .whatsapp-link {
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .btn-explore {
             background-color: var(--burgundy);
             color: var(--beige);
             padding: 12px 30px;
             text-decoration: none;
             display: inline-block;
-            transition: 0.3s;
             border: 1px solid var(--burgundy);
+            font-weight: 600;
         }
 
-        .btn:hover {
-            background-color: transparent;
-            color: var(--burgundy);
-        }
-
-        /* FOOTER */
         footer {
             background-color: var(--black);
             color: var(--beige);
@@ -191,161 +194,127 @@
             text-align: center;
         }
 
-        .footer-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .socials a {
-            color: var(--beige);
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .socials a:hover {
-            color: var(--burgundy);
-        }
-
-        .copyright {
-            margin-top: 3rem;
-            font-size: 0.7rem;
-            opacity: 0.6;
-            letter-spacing: 1px;
-        }
-        .product-img {
-            width: 100%;
-            height: 400px; /* You can change 400 to 500 if you want them taller */
-            object-fit: cover;
-            display: block;
-        }
-
-        .product-card {
-            display: flex;
-            flex-direction: column;
-            background: white;
-            height: 100%;
-        }
-
-        .product-info {
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
+        .socials a { color: var(--beige); margin: 0 15px; text-decoration: none; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo-container">
-            <img src="logo herera.jpeg" alt="HerEra Logo" style="height: 100px; width: auto; padding: 5px;">
+            <img src="logo herera.jpeg" alt="HerEra Logo" class="logo-img">
         </div>
         <nav>
             <a href="#home">Home</a>
             <a href="#shop">Collection</a>
-            <a href="#about">Our Mission</a>
-            <a href="#contact">Contact</a>
+            <a href="#about">Mission</a>
+            <div class="panier-status">
+                <span style="font-size: 11px; font-weight: 700;">PANIER</span>
+                <span id="cart-count">0</span>
+            </div>
         </nav>
     </header>
 
     <section class="hero" id="home">
         <h1>Your Style, Your Era</h1>
         <p>Modern silhouettes designed for the bold women of Morocco.</p>
-        <a href="#shop" class="btn">Explore Collection</a>
+        <a href="#shop" class="btn-explore">Explore Collection</a>
     </section>
 
     <section class="mission" id="about">
         <h2>Redefining Moroccan Fashion</h2>
-        <p>HerEra was born to empower women who feel limited by current fashion choices. We blend modern global trends with a touch of timeless elegance, ensuring every woman in Morocco can express her unique identity through her wardrobe.</p>
+        <p>HerEra was born to empower women who feel limited by current fashion choices. We blend modern global trends with a touch of timeless elegance.</p>
     </section>
 
     <section class="shop" id="shop">
         <h2 class="section-title">New Arrivals</h2>
         <div class="grid">
+            
+            <!-- PRODUCT 1: BEIGE ELEGANCE -->
             <div class="product-card">
                 <img src="beige elegance .jpeg" alt="beige elegance" class="product-img">
                 <div class="product-info">
                     <h3>beige elegance</h3>
                     <p class="price">750 MAD</p>
-                    <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Modern%20Kaftan" 
-           class="whatsapp-btn" 
-           style="background-color: #25D366; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; margin-top: 10px; border-radius: 5px; font-weight: bold;">
-           Order via WhatsApp
-        </a>
-    </div>
-</div>
+                    <div class="btn-stack">
+                        <button onclick="addToCart()" class="add-to-panier">Add to Panier</button>
+                        <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Beige%20Elegance" class="whatsapp-link">Order via WhatsApp</a>
+                    </div>
                 </div>
             </div>
+
+            <!-- PRODUCT 2: GOLDEN CONTOUR -->
             <div class="product-card">
                 <img src="golden contour.jpeg" alt="golden contour" class="product-img">
                 <div class="product-info">
                     <h3>golden contour</h3>
                     <p class="price">800 MAD</p>
-                    <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Modern%20Kaftan" 
-           class="whatsapp-btn" 
-           style="background-color: #25D366; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; margin-top: 10px; border-radius: 5px; font-weight: bold;">
-           Order via WhatsApp
-        </a>
-    </div>
-</div>
+                    <div class="btn-stack">
+                        <button onclick="addToCart()" class="add-to-panier">Add to Panier</button>
+                        <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Golden%20Contour" class="whatsapp-link">Order via WhatsApp</a>
+                    </div>
                 </div>
             </div>
+
+            <!-- PRODUCT 3: DARK HEIRESS -->
             <div class="product-card">
                 <img src="dark heiress .jpeg" alt="dark heiress" class="product-img">
                 <div class="product-info">
                     <h3>Modern Noir</h3>
                     <p class="price">1200 MAD</p>
-                    <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Modern%20Kaftan" 
-           class="whatsapp-btn" 
-           style="background-color: #25D366; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; margin-top: 10px; border-radius: 5px; font-weight: bold;">
-           Order via WhatsApp
-        </a>
-    </div>
-</div>
+                    <div class="btn-stack">
+                        <button onclick="addToCart()" class="add-to-panier">Add to Panier</button>
+                        <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Modern%20Noir" class="whatsapp-link">Order via WhatsApp</a>
+                    </div>
                 </div>
             </div>
-        <div class="product-card">
+
+            <!-- PRODUCT 4: EMERALD DYNASTY -->
+            <div class="product-card">
                 <img src="emerald dynasty .jpeg" alt="emerald dynasty" class="product-img">
                 <div class="product-info">
                     <h3>emerald dynasty</h3>
                     <p class="price">999 MAD</p>
-                    <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Modern%20Kaftan" 
-           class="whatsapp-btn" 
-           style="background-color: #25D366; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; margin-top: 10px; border-radius: 5px; font-weight: bold;">
-           Order via WhatsApp
-        </a>
-    </div>
-</div>
+                    <div class="btn-stack">
+                        <button onclick="addToCart()" class="add-to-panier">Add to Panier</button>
+                        <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Emerald%20Dynasty" class="whatsapp-link">Order via WhatsApp</a>
+                    </div>
                 </div>
             </div>
-             <div class="product-card">
+
+            <!-- PRODUCT 5: DESERT ELEGANCE -->
+            <div class="product-card">
                 <img src="desert elegance .jpeg" alt="desert elegance" class="product-img">
                 <div class="product-info">
-                    <h3>golden contour</h3>
+                    <h3>Desert Elegance</h3>
                     <p class="price">1299 MAD</p>
-                    <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Modern%20Kaftan" 
-           class="whatsapp-btn" 
-           style="background-color: #25D366; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; margin-top: 10px; border-radius: 5px; font-weight: bold;">
-           Order via WhatsApp
-        </a>
-    </div>
-</div>
+                    <div class="btn-stack">
+                        <button onclick="addToCart()" class="add-to-panier">Add to Panier</button>
+                        <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Desert%20Elegance" class="whatsapp-link">Order via WhatsApp</a>
+                    </div>
                 </div>
+            </div>
+
         </div>
     </section>
 
-    <footer id="contact">
-        <div class="footer-logo">HerEra</div>
+    <footer>
+        <div style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1rem;">HerEra</div>
         <p style="margin-bottom: 1.5rem;">Empowering the modern woman's wardrobe.</p>
         <div class="socials">
             <a href="#">Instagram</a>
-            <a href="#">WhatsApp</a>
+            <a href="https://wa.me/212688132531">WhatsApp</a>
             <a href="#">Facebook</a>
         </div>
-        <p class="copyright">&copy; 2026 HerEra Morocco. All Rights Reserved.</p>
+        <p style="margin-top: 3rem; font-size: 0.7rem; opacity: 0.6;">&copy; 2026 HerEra Morocco. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById('cart-count').innerText = count;
+        }
+    </script>
 
 </body>
 </html>
