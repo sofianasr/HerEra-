@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerEra | Modern Fashion for the Moroccan Woman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --burgundy: #800020;
+            --beige: #F5F5DC;
+            --off-white: #FAF9F6;
+            --black: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--off-white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        /* NAVIGATION */
+        header {
+            background-color: var(--black);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            color: var(--beige);
+            font-size: 2rem;
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        nav a {
+            color: var(--beige);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--burgundy);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 90vh;
+            /* Update the URL below with your actual hero image link */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--beige);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* ABOUT / MISSION */
+        .mission {
+            padding: 5rem 10%;
+            background-color: var(--beige);
+            text-align: center;
+            color: var(--black);
+        }
+
+        .mission h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--burgundy);
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        .mission p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* SHOP SECTION */
+        .shop {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--black);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            transition: transform 0.4s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-bottom: 5px solid var(--burgundy);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            color: var(--burgundy);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* BUTTON */
+        .btn {
+            background-color: var(--burgundy);
+            color: var(--beige);
+            padding: 12px 30px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+            border: 1px solid var(--burgundy);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--burgundy);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--black);
+            color: var(--beige);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .socials a {
+            color: var(--beige);
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .socials a:hover {
+            color: var(--burgundy);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="#" class="logo-text">HerEra</a>
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#shop">Collection</a>
+            <a href="#about">Our Mission</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>Your Style, Your Era</h1>
+        <p>Modern silhouettes designed for the bold women of Morocco.</p>
+        <a href="#shop" class="btn">Explore Collection</a>
+    </section>
+
+    <section class="mission" id="about">
+        <h2>Redefining Moroccan Fashion</h2>
+        <p>HerEra was born to empower women who feel limited by current fashion choices. We blend modern global trends with a touch of timeless elegance, ensuring every woman in Morocco can express her unique identity through her wardrobe.</p>
+    </section>
+
+    <section class="shop" id="shop">
+        <h2 class="section-title">New Arrivals</h2>
+        <div class="grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800" alt="Burgundy Dress" class="product-img">
+                <div class="product-info">
+                    <h3>The Burgundy Muse</h3>
+                    <p class="price">450 MAD</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?q=80&w=800" alt="Beige Dress" class="product-img">
+                <div class="product-info">
+                    <h3>Minimalist Beige</h3>
+                    <p class="price">390 MAD</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1539109132382-381bb3f1cff6?q=80&w=800" alt="Modern Black" class="product-img">
+                <div class="product-info">
+                    <h3>Modern Noir</h3>
+                    <p class="price">520 MAD</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-logo">HerEra</div>
+        <p style="margin-bottom: 1.5rem;">Empowering the modern woman's wardrobe.</p>
+        <div class="socials">
+            <a href="#">Instagram</a>
+            <a href="#">WhatsApp</a>
+            <a href="#">Facebook</a>
+        </div>
+        <p class="copyright">&copy; 2026 HerEra Morocco. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
