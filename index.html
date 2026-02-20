@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HerEra | Modern Fashion Morocco</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>HerEra | Modern Moroccan Fashion & Luxury Women's Boutique</title>
+    <meta name="description" content="Discover HerEra, the premier boutique for modern Moroccan fashion. Shop our exclusive collection of elegant kaftans, contemporary silhouettes, and luxury wear designed for the bold women of Morocco. Quality craftsmanship meets modern style.">
+    <meta name="keywords" content="Moroccan fashion, modern kaftan, luxury boutique Morocco, women's clothing Casablanca, elegant Moroccan dresses, HerEra boutique">
+    <meta name="author" content="HerEra">
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="HerEra | Modern Fashion for the Moroccan Woman">
+    <meta property="og:description" content="Elevate your wardrobe with contemporary Moroccan elegance. Shop the latest collection at HerEra.">
+    <meta property="og:type" content="website">
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -20,6 +31,7 @@
             background-color: var(--off-white);
             color: var(--black);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* NAVIGATION & HEADER */
@@ -36,8 +48,10 @@
         }
 
         .logo-img {
-            height: 80px;
+            height: 90px;
             width: auto;
+            mix-blend-mode: multiply; 
+            display: block;
         }
 
         nav {
@@ -67,7 +81,11 @@
             padding: 5px 15px;
             border-radius: 20px;
             border: 1px solid #ddd;
+            cursor: pointer;
+            transition: 0.3s;
         }
+
+        .panier-status:hover { background: #eee; }
 
         #cart-count {
             background: var(--burgundy);
@@ -77,6 +95,62 @@
             font-size: 11px;
             font-weight: bold;
             margin-left: 6px;
+        }
+
+        /* SIDE CART PANEL */
+        #cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 350px;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: 0.4s ease;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cart-sidebar.open { right: 0; }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .close-cart { cursor: pointer; font-size: 1.5rem; }
+
+        #cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #fafafa;
+            padding-bottom: 0.5rem;
+        }
+
+        .cart-footer {
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .total-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
         }
 
         /* HERO SECTION */
@@ -104,6 +178,8 @@
         }
 
         .mission h2 { font-family: 'Playfair Display', serif; color: var(--burgundy); margin-bottom: 1.5rem; font-size: 2.5rem; }
+        .mission p { max-width: 900px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem; }
+        .seo-text { margin-top: 1.5rem; font-size: 1rem; color: #444; }
 
         /* SHOP GRID */
         .shop { padding: 5rem 5%; }
@@ -128,7 +204,6 @@
 
         .product-card:hover { transform: translateY(-10px); }
 
-        /* THE IMAGE FIX */
         .product-img {
             width: 100%;
             height: 480px; 
@@ -147,7 +222,7 @@
         }
 
         .product-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 5px; text-transform: capitalize; }
-        .price { color: var(--burgundy); font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; }
+        .price-tag { color: var(--burgundy); font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; }
 
         /* BUTTONS */
         .btn-stack { display: flex; flex-direction: column; gap: 8px; }
@@ -163,7 +238,9 @@
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: 0.3s;
         }
+        .add-to-panier:hover { background-color: var(--burgundy); }
 
         .whatsapp-link {
             background-color: #25D366;
@@ -175,6 +252,19 @@
             text-transform: uppercase;
             border-radius: 4px;
             transition: 0.3s;
+            text-align: center;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background-color: var(--burgundy);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-explore {
@@ -194,10 +284,43 @@
             text-align: center;
         }
 
-        .socials a { color: var(--beige); margin: 0 15px; text-decoration: none; font-size: 0.9rem; }
+        .socials a { color: var(--beige); margin: 0 15px; text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+        .socials a:hover { color: var(--burgundy); }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+        .cart-overlay.active { display: block; }
     </style>
 </head>
 <body>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div id="cart-sidebar">
+        <div class="cart-header">
+            <h2 style="font-family: 'Playfair Display';">Votre Panier</h2>
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+        </div>
+        <div id="cart-items">
+            <!-- Items will appear here -->
+            <p id="empty-msg" style="text-align: center; margin-top: 2rem; opacity: 0.6;">Votre panier est vide.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total-price">
+                <span>Total:</span>
+                <span id="cart-total">0 MAD</span>
+            </div>
+            <button class="checkout-btn" onclick="checkoutWhatsApp()">Commander sur WhatsApp</button>
+        </div>
+    </div>
 
     <header>
         <div class="logo-container">
@@ -206,8 +329,8 @@
         <nav>
             <a href="#home">Home</a>
             <a href="#shop">Collection</a>
-            <a href="#about">Mission</a>
-            <div class="panier-status">
+            <a href="https://www.instagram.com/herera_dress?igsh=MXhlbmtuZTNqYWJpaA%3D%3D&utm_source=qr" target="_blank">Instagram</a>
+            <div class="panier-status" onclick="toggleCart()">
                 <span style="font-size: 11px; font-weight: 700;">PANIER</span>
                 <span id="cart-count">0</span>
             </div>
@@ -222,73 +345,77 @@
 
     <section class="mission" id="about">
         <h2>Redefining Moroccan Fashion</h2>
-        <p>HerEra was born to empower women who feel limited by current fashion choices. We blend modern global trends with a touch of timeless elegance.</p>
+        <p>
+            HerEra was founded to bridge the gap between <strong>timeless Moroccan tradition</strong> and <strong>global modern trends</strong>. 
+            We believe that every woman deserves a wardrobe that reflects her strength and unique identity. 
+        </p>
+        <div class="seo-text">
+            Our luxury women's boutique in Morocco offers a curated selection of <strong>contemporary kaftans</strong>, 
+            <strong>elegant evening wear</strong>, and <strong>modern silhouettes</strong>. By focusing on premium fabrics 
+            and sophisticated tailoring, HerEra has become a destination for <strong>modern Moroccan fashion</strong> 
+            that empowers the bold woman of today. Explore our new arrivals and find your next signature piece.
+        </div>
     </section>
 
     <section class="shop" id="shop">
         <h2 class="section-title">New Arrivals</h2>
         <div class="grid">
             
-            <!-- PRODUCT 1: BEIGE ELEGANCE -->
             <div class="product-card">
-                <img src="beige elegance .jpeg" alt="beige elegance" class="product-img">
+                <img src="beige elegance .jpeg" alt="beige elegance dress herera" class="product-img">
                 <div class="product-info">
                     <h3>beige elegance</h3>
-                    <p class="price">750 MAD</p>
+                    <p class="price-tag">750 MAD</p>
                     <div class="btn-stack">
-                        <button onclick="addToCart()" class="add-to-panier">Add to Panier</button>
+                        <button onclick="addToCart('Beige Elegance', 750)" class="add-to-panier">Add to Panier</button>
                         <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Beige%20Elegance" class="whatsapp-link">Order via WhatsApp</a>
                     </div>
                 </div>
             </div>
 
-            <!-- PRODUCT 2: GOLDEN CONTOUR -->
             <div class="product-card">
-                <img src="golden contour.jpeg" alt="golden contour" class="product-img">
+                <img src="golden contour.jpeg" alt="golden contour modern dress" class="product-img">
                 <div class="product-info">
                     <h3>golden contour</h3>
-                    <p class="price">800 MAD</p>
+                    <p class="price-tag">800 MAD</p>
                     <div class="btn-stack">
-                        <button onclick="addToCart()" class="add-to-panier">Add to Panier</button>
+                        <button onclick="addToCart('Golden Contour', 800)" class="add-to-panier">Add to Panier</button>
                         <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Golden%20Contour" class="whatsapp-link">Order via WhatsApp</a>
                     </div>
                 </div>
             </div>
 
-            <!-- PRODUCT 3: DARK HEIRESS -->
             <div class="product-card">
-                <img src="dark heiress .jpeg" alt="dark heiress" class="product-img">
+                <img src="dark heiress .jpeg" alt="dark heiress modern noir kaftan" class="product-img">
                 <div class="product-info">
                     <h3>Modern Noir</h3>
-                    <p class="price">1200 MAD</p>
+                    <p class="price-tag">1200 MAD</p>
                     <div class="btn-stack">
-                        <button onclick="addToCart()" class="add-to-panier">Add to Panier</button>
+                        <button onclick="addToCart('Modern Noir', 1200)" class="add-to-panier">Add to Panier</button>
                         <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Modern%20Noir" class="whatsapp-link">Order via WhatsApp</a>
                     </div>
                 </div>
             </div>
 
-            <!-- PRODUCT 4: EMERALD DYNASTY -->
             <div class="product-card">
-                <img src="emerald dynasty .jpeg" alt="emerald dynasty" class="product-img">
+                <img src="emerald dynasty .jpeg" alt="emerald dynasty luxury dress" class="product-img">
                 <div class="product-info">
                     <h3>emerald dynasty</h3>
-                    <p class="price">999 MAD</p>
+                    <p class="price-tag">999 MAD</p>
                     <div class="btn-stack">
-                        <button onclick="addToCart()" class="add-to-panier">Add to Panier</button>
+                        <button onclick="addToCart('Emerald Dynasty', 999)" class="add-to-panier">Add to Panier</button>
                         <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Emerald%20Dynasty" class="whatsapp-link">Order via WhatsApp</a>
                     </div>
                 </div>
             </div>
 
-            <!-- PRODUCT 5: DESERT ELEGANCE -->
             <div class="product-card">
-                <img src="desert elegance .jpeg" alt="desert elegance" class="product-img">
+                <img src="desert elegance .jpeg" alt="desert elegance moroccan dress" class="product-img">
                 <div class="product-info">
                     <h3>Desert Elegance</h3>
-                    <p class="price">1299 MAD</p>
+                    <p class="price-tag">1299 MAD</p>
                     <div class="btn-stack">
-                        <button onclick="addToCart()" class="add-to-panier">Add to Panier</button>
+                        <button onclick="addToCart('Desert Elegance', 1299)" class="add-to-panier">Add to Panier</button>
                         <a href="https://wa.me/212688132531?text=Hello%20HerEra!%20I%20want%20to%20order%20the%20Desert%20Elegance" class="whatsapp-link">Order via WhatsApp</a>
                     </div>
                 </div>
@@ -301,7 +428,7 @@
         <div style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1rem;">HerEra</div>
         <p style="margin-bottom: 1.5rem;">Empowering the modern woman's wardrobe.</p>
         <div class="socials">
-            <a href="#">Instagram</a>
+            <a href="https://www.instagram.com/herera_dress?igsh=MXhlbmtuZTNqYWJpaA%3D%3D&utm_source=qr" target="_blank">Instagram</a>
             <a href="https://wa.me/212688132531">WhatsApp</a>
             <a href="#">Facebook</a>
         </div>
@@ -309,10 +436,62 @@
     </footer>
 
     <script>
-        let count = 0;
-        function addToCart() {
-            count++;
-            document.getElementById('cart-count').innerText = count;
+        let cart = [];
+        let total = 0;
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+            document.getElementById('cart-overlay').classList.toggle('active');
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            // Automatically open cart when item added
+            if (!document.getElementById('cart-sidebar').classList.contains('open')) {
+                toggleCart();
+            }
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById('cart-items');
+            const countEl = document.getElementById('cart-count');
+            const totalEl = document.getElementById('cart-total');
+            const emptyMsg = document.getElementById('empty-msg');
+
+            list.innerHTML = '';
+            total = 0;
+
+            if (cart.length === 0) {
+                list.appendChild(emptyMsg);
+            } else {
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    const div = document.createElement('div');
+                    div.className = 'cart-item';
+                    div.innerHTML = `
+                        <span>${item.name}</span>
+                        <span>${item.price} MAD</span>
+                    `;
+                    list.appendChild(div);
+                });
+            }
+
+            countEl.innerText = cart.length;
+            totalEl.innerText = total + ' MAD';
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return;
+            
+            let message = "Bonjour HerEra! Je souhaite commander :\n";
+            cart.forEach(item => {
+                message += `- ${item.name} (${item.price} MAD)\n`;
+            });
+            message += `\nTotal: ${total} MAD`;
+            
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/212688132531?text=${encoded}`, '_blank');
         }
     </script>
 
